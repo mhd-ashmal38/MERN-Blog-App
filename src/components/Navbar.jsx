@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -38,15 +44,20 @@ const Navbar = () => {
       </div>
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
-        <Link to="/">Trending</Link>
         <Link to="/">Home</Link>
+        <Link to="/">Trending</Link>
         <Link to="/">Most Popular</Link>
         <Link to="/">About</Link>
-        <Link to="/login">
-          <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-            Login 👋
-          </button>
-        </Link>
+        <SignedOut>
+          <Link to="/login">
+            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+              Login 👋
+            </button>
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </div>
   );
