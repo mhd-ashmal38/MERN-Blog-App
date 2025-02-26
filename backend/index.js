@@ -5,10 +5,12 @@ import postRouter from "./routes/post.route.js"
 import commentRouter from "./routes/comment.route.js"
 import connectDB from "./lib/connectDB.js"
 import webhookRouter from "./routes/webhook.route.js"
+import { clerkMiddleware } from '@clerk/express'
 
 dotenv.config();
 
 const app = express()
+app.use(clerkMiddleware());
 app.use("/webhooks", webhookRouter);
 app.use(express.json())
 
